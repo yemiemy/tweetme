@@ -24,13 +24,7 @@ def tweet_list_view(request, *args, **kwargs):
     Consume by JavaScript or Swift/Java/iOS/Android 
     """
     qs = Tweet.objects.order_by('-id')
-    tweets_list = [
-        {
-            "id":x.id, 
-            "content":x.content, 
-            "likes":randint(1,100), 
-            "date_stamp":humanize.naturalday(x.date_stamp)
-            } for x in qs]
+    tweets_list = [x.serialize() for x in qs]
 
     data = {
         "isUser":False,
@@ -46,7 +40,7 @@ def tweet_create_view(request, *args, **kwargs):
         # Do other form related logic
         obj.save()
         if request.is_ajax():
-            return JsonResponse({}, status=201)
+            return JsonResponse(obj.serialize(), status=201)
         if next_url != None and is_safe_url(next_url, ALLOWED_HOSTS):
             return redirect("home")
         form = TweetForm()
