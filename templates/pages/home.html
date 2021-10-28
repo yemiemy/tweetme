@@ -20,17 +20,20 @@
 </div>
 
 <div class="py-6">
-    <div class="container">
+    <div class="container"> 
         <div class="card">
             <div class="card-body">
                 <div class="d-lg-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center mb-4 mb-lg-0">
                         <img src="{% static 'assets/images/avatar/avatar.jpg' %}" id="img-uploaded" class="avatar-xl rounded-circle" alt="">
                         <div class="ml-3">
+                            <div class="d-none alert alert-danger" id="tweet-create-form-error">
+
+                            </div>
                             <form action="{% url 'create_tweet' %}" method="POST" id="tweet-create-form" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" name="next" value="/">
-                                <textarea name="content" maxlength="240" required placeholder="What's happening?" class="form-control" id="" cols="150" rows="3"></textarea>
+                                <textarea name="content" maxlength="" required placeholder="What's happening?" class="form-control" id="" cols="150" rows="3"></textarea>
                                 <div class="mt-1">
                                     <button type="submit" class="btn btn-outline-primary btn-sm">Tweet</button>
                                 </div>
@@ -52,6 +55,18 @@
 
 <script>
     // Tweet Create Form Handling
+    
+    function handleTweetFormError(msg, display){
+        const formErrorElement = document.getElementById("tweet-create-form-error")
+        if (display === true){
+            formErrorElement.setAttribute("class", "alert alert-danger")
+            formErrorElement.innerText = msg
+        } else{
+            formErrorElement.setAttribute("class", "d-none alert alert-danger")
+            formErrorElement.innerText = msg
+        }
+    }
+
     function handleTweetCreateFormSubmit(event) {
         event.preventDefault()
         const myForm = event.target
@@ -66,6 +81,7 @@
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
         xhr.onload = function () {
             if (xhr.status === 201){
+                handleTweetFormError("", false)
                 const newTweetJson = xhr.response
                 const newTweetElement = formatTweetElement(newTweetJson)
                 const ogHtml = tweetsContainerElement.innerHTML
@@ -73,7 +89,15 @@
                 myForm.reset()
             } else if (xhr.status === 400) {
                 const errorJson = xhr.response
-                console.log(errorJson)
+                const contentError = errorJson.content
+                let contenErrorMsg;
+                if (contentError){
+                    contenErrorMsg = contentError[0]
+                } else {
+                    alert("An error occured. Please try again.")
+                }
+                handleTweetFormError(contenErrorMsg, true)
+                console.log(contenErrorMsg)
             } else if (xhr.status === 500){
                 alert("There was a server error, please try again.")
             }
