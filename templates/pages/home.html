@@ -60,14 +60,15 @@
         const method = myForm.getAttribute("method")
         const xhr = new XMLHttpRequest()
         xhr.open(method, url)
+        xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
         xhr.onload = function () {
             const serverResponse = xhr.response
-            // console.log(serverResponse)
+            console.log(xhr.status, serverResponse)
             const tweetsElement = document.getElementById('tweets')
             loadTweets(tweetsElement)
         }
         xhr.send(myFormData)
-        console.log(url, method)
     }
     
     const tweetCreateForm = document.getElementById('tweet-create-form')
@@ -88,7 +89,6 @@
         xhr.onload = function(){
             const serverResponse = xhr.response
             const listedTweets = serverResponse.response
-            console.log(listedTweets)
             var finalTweetStr = ""
             for (var i = 0; i < listedTweets.length; ++i){
                 var tweet =  listedTweets[i]
