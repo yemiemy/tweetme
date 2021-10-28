@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Tweet
+from .forms import TweetForm
+import humanize
 from random import randint
+
 # Create your views here.
 
 def home(request, *args, **kargs):
@@ -13,13 +16,28 @@ def tweet_list_view(request, *args, **kwargs):
     Consume by JavaScript or Swift/Java/iOS/Android 
     """
     qs = Tweet.objects.order_by('-id')
-    tweets_list = [{"id":x.id, "content":x.content, "likes":randint(1,100)} for x in qs]
+    tweets_list = [
+        {
+            "id":x.id, 
+            "content":x.content, 
+            "likes":randint(1,100), 
+            "date_stamp":humanize.naturalday(x.date_stamp)
+            } for x in qs]
 
     data = {
         "isUser":False,
         "response": tweets_list
     }
     return JsonResponse(data)
+
+def tweet_create_view(request, *args, **kwargs):
+    form = TweetForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        # Do other form related logic
+        obj.save()
+        form = TweetForm()
+    return render(request, 'components/form.html', {'form':form})
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     status = 200
