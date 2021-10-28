@@ -1,27 +1,101 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+	<!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>TweetMe {% block title %}{% endblock %}</title>
+  <!-- Favicon icon-->
+  <style data-tippy-stylesheet="">.tippy-box[data-animation=fade][data-state=hidden]{opacity:0}[data-tippy-root]{max-width:calc(100vw - 10px)}.tippy-box{position:relative;background-color:#333;color:#fff;border-radius:4px;font-size:14px;line-height:1.4;outline:0;transition-property:transform,visibility,opacity}.tippy-box[data-placement^=top]>.tippy-arrow{bottom:0}.tippy-box[data-placement^=top]>.tippy-arrow:before{bottom:-7px;left:0;border-width:8px 8px 0;border-top-color:initial;transform-origin:center top}.tippy-box[data-placement^=bottom]>.tippy-arrow{top:0}.tippy-box[data-placement^=bottom]>.tippy-arrow:before{top:-7px;left:0;border-width:0 8px 8px;border-bottom-color:initial;transform-origin:center bottom}.tippy-box[data-placement^=left]>.tippy-arrow{right:0}.tippy-box[data-placement^=left]>.tippy-arrow:before{border-width:8px 0 8px 8px;border-left-color:initial;right:-7px;transform-origin:center left}.tippy-box[data-placement^=right]>.tippy-arrow{left:0}.tippy-box[data-placement^=right]>.tippy-arrow:before{left:-7px;border-width:8px 8px 8px 0;border-right-color:initial;transform-origin:center right}.tippy-box[data-inertia][data-state=visible]{transition-timing-function:cubic-bezier(.54,1.5,.38,1.11)}.tippy-arrow{width:16px;height:16px;color:#333}.tippy-arrow:before{content:"";position:absolute;border-color:transparent;border-style:solid}.tippy-content{position:relative;padding:5px 9px;z-index:1}</style>
+  <link rel="shortcut icon" type="image/x-icon" href=" {% static 'assets/images/brand/logo/tweetme-icon.png' %} ">
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <!-- Libs CSS -->
+
+  <link href=" {% static 'assets/css/feather.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/bootstrap-icons.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/dragula.min.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/materialdesignicons.min.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/prism.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/dropzone.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/magnific-popup.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/bootstrap-select.min.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/tagify.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/tiny-slider.css' %} " rel="stylesheet">
+  <link href=" {% static 'assets/css/tippy.css' %} " rel="stylesheet">
+
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href=" {% static 'assets/css/theme.min.css' %} ">
+    <title>
+      TweetMe
+      {% block title %}
+      
+      {% endblock title %}
+          
+    </title>
   </head>
+
   <body>
+  
+  
+    <!-- Navbar -->
+    {% include 'components/navbar.html' %}
     
     {% block content %}
-
-
-    {% endblock content %}
         
+    {% endblock content %}
+        <!-- Footer --> 
+    {% include 'components/footer.html' %}
+    <!-- Scripts -->
+    <!-- Libs JS -->
+    <script src=" {% static 'assets/js/jquery.min.js' %} "></script>
+    <script src=" {% static 'assets/js/bootstrap.bundle.min.js' %} "></script>
+    <script src=" {% static 'assets/js/odometer.min.js' %} "></script>
+    <script src=" {% static 'assets/js/jquery.slimscroll.min.js' %} "></script>
+    <script src=" {% static 'assets/js/jquery.magnific-popup.min.js' %} "></script>
+    <script src=" {% static 'assets/js/bootstrap-select.min.js' %} "></script>
+    <script src=" {% static 'assets/js/flatpickr.min.js' %} "></script>
+    <script src=" {% static 'assets/js/jquery.inputmask.min.js' %} "></script>
+    <script src=" {% static 'assets/js/quill.min.js' %} "></script>
+    <script src=" {% static 'assets/js/file-upload-with-preview.min.js' %} "></script>
+    <script src=" {% static 'assets/js/dragula.min.js' %} "></script>
+    <script src=" {% static 'assets/js/bs-stepper.min.js' %} "></script>
+    <script src=" {% static 'assets/js/dropzone.min.js' %} "></script>
+    <script src=" {% static 'assets/js/jQuery.print.js' %} "></script>
+    <script src=" {% static 'assets/js/prism.js' %} "></script>
+    <script src=" {% static 'assets/js/prism-scss.min.js' %} "></script>
+    <script src=" {% static 'assets/js/tagify.min.js' %} "></script>
+    <script src=" {% static 'assets/js/tiny-slider.js' %} "></script>
+    <script src=" {% static 'assets/js/popper.min.js' %} "></script>
+    <script src=" {% static 'assets/js/tippy-bundle.umd.min.js' %} "></script>
+    <script src=" {% static 'assets/js/typed.min.js' %} "></script>
+    <script src=" {% static 'assets/js/jsvectormap.min.js' %} "></script>
+    <script src=" {% static 'assets/js/jquery.dataTables.min.js' %} "></script>
+    <script src=" {% static 'assets/js/dataTables.bootstrap5.min.js' %} "></script>
+    <script src=" {% static 'assets/js/dataTables.responsive.min.js' %} "></script>
+    <script src=" {% static 'assets/js/responsive.bootstrap5.min.js' %} "></script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <!-- clipboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+
+    <!-- Theme JS -->
+    <script src=" {% static 'assets/js/theme.min.js' %} "></script>
+
+
+    <svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs>
+        <polyline id="SvgjsPolyline1003" points="0,0"></polyline>
+        <path id="SvgjsPath1004" d="M0 0 ">
+
+        </path>
+    </svg>
   </body>
 </html>
+        

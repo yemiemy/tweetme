@@ -3,20 +3,58 @@
 {% block title %}
     Home
 {% endblock title %}
-    
-{% block content %}
-<h1>Welcome to TweetMe!</h1>
 
-<div id="tweets">
-    Replace me.
+{% load static %}
+{% block content %}
+
+<div class="py-lg-6 py-4 bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+          <div>
+            <h1 class="text-white display-4 mb-0">Welcome to TweetMe!</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
+
+<div class="py-6">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-lg-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center mb-4 mb-lg-0">
+                        <img src="{% static 'assets/images/avatar/avatar.jpg' %}" id="img-uploaded" class="avatar-xl rounded-circle" alt="">
+                        <div class="ml-3">
+                            <form action="" method="POST" enctype="multipart/form-data">
+                                <h4 class="mb-0">What's happening?</h4>
+                                <textarea name="" class="form-control" id="" cols="150" rows="3"></textarea>
+                                <div class="mt-1">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Tweet</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <!-- Tweets -->
+                <div id="tweets">
+                    Replace me...
+                </div>
+                <!-- //Tweets -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     const tweetsElement = document.getElementById('tweets')
     tweetsElement.innerHTML = "Loading..."
     const xhr = new XMLHttpRequest()
     const method ="GET"
-    const url = "/tweets"
+    const url = "{% url 'tweets' %}"
     const responseType = "json"
 
     function handleDidLike(tweet_id, currentCount) {
@@ -25,22 +63,38 @@
 
     function LikeBtn(tweet){
         return `
-        <button class='btn btn-primary btn-sm' onclick='handleDidLike(${tweet.id}, ${tweet.likes})'>
-            ${tweet.likes} Likes
-        </button>`
+        <a onclick='handleDidLike(${tweet.id}, ${tweet.likes})'>
+            <i class="fe fe-heart mr-1"></i><small>${tweet.likes}</small>
+        </a>`
     }
 
     function formatTweetElement(tweet) {
         var formattedTweet =
         `
-        <div class='mb-4 ml-3'>
-            <p id='tweet-${tweet.id}'>
-                ${tweet.content}
-            </p>
-            <div class='btn-group'>
-                ${LikeBtn(tweet)}
+        <div class="d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center mb-4 mb-lg-0">
+                <img src="{% static 'assets/images/avatar/avatar.jpg' %}" id="img-uploaded" class="avatar-lg rounded-circle" alt="">
+                <div class="ml-3">
+                    <h4 class="mb-0">Nickname <small style="color:grey">@username 10m</small></h4>
+                    <p class="mb-0" id='tweet-${tweet.id}'>
+                        ${tweet.content}
+                        PNG or JPG no bigger than 800px wide and 800px tall.
+                    </p>
+                    <div class='btn-group d-flex'>
+                        <div>
+                            ${LikeBtn(tweet)}
+                        </div>
+                        <div class="ml-3">
+                            <i class="fe fe-refresh-ccw mr-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <i class="fe fe-message-square mr-1"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="dropdown-divider"></div>
             ` 
         return formattedTweet
     }
