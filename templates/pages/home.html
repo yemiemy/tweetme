@@ -27,9 +27,10 @@
                     <div class="d-flex align-items-center mb-4 mb-lg-0">
                         <img src="{% static 'assets/images/avatar/avatar.jpg' %}" id="img-uploaded" class="avatar-xl rounded-circle" alt="">
                         <div class="ml-3">
-                            <form action="" method="POST" enctype="multipart/form-data">
-                                <h4 class="mb-0">What's happening?</h4>
-                                <textarea name="" class="form-control" id="" cols="150" rows="3"></textarea>
+                            <form action="{% url 'create_tweet' %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="/">
+                                <textarea name="content" placeholder="What's happening?" class="form-control" id="" cols="150" rows="3"></textarea>
                                 <div class="mt-1">
                                     <button type="submit" class="btn btn-outline-primary btn-sm">Tweet</button>
                                 </div>
