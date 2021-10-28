@@ -8,6 +8,9 @@ class Tweet(models.Model):
     image = models.ImageField(upload_to='tweets/images', blank=True, null=True)
     date_stamp = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-id']
+
     def serialize(self):
         return {
             "id":self.id, 

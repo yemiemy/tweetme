@@ -30,7 +30,7 @@
                             <form action="{% url 'create_tweet' %}" method="POST" id="tweet-create-form" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" name="next" value="/">
-                                <textarea name="content" placeholder="What's happening?" class="form-control" id="" cols="150" rows="3"></textarea>
+                                <textarea name="content" required placeholder="What's happening?" class="form-control" id="" cols="150" rows="3"></textarea>
                                 <div class="mt-1">
                                     <button type="submit" class="btn btn-outline-primary btn-sm">Tweet</button>
                                 </div>
@@ -67,6 +67,9 @@
         xhr.onload = function () {
             const newTweetJson = xhr.response
             const newTweetElement = formatTweetElement(newTweetJson)
+            const ogHtml = tweetsContainerElement.innerHTML
+            tweetsContainerElement.innerHTML = newTweetElement + ogHtml
+            myForm.reset()
         }
         xhr.send(myFormData)
     }
@@ -125,7 +128,6 @@
                     <h4 class="mb-0">Nickname <small style="color:grey">@username ${tweet.date_stamp}</small></h4>
                     <p class="mb-0" id='tweet-${tweet.id}'>
                         ${tweet.content}
-                        PNG or JPG no bigger than 800px wide and 800px tall.
                     </p>
                     <div class='btn-group d-flex'>
                         <div>

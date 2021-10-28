@@ -23,7 +23,7 @@ def tweet_list_view(request, *args, **kwargs):
     REST API VIEW
     Consume by JavaScript or Swift/Java/iOS/Android 
     """
-    qs = Tweet.objects.order_by('-id')
+    qs = Tweet.objects.all()
     tweets_list = [x.serialize() for x in qs]
 
     data = {
