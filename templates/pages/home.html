@@ -199,7 +199,7 @@
     function RetweetBtn(tweet){
         return `
         <a onclick='handleTweetAction(${tweet.id}, ${tweet.likes}, "retweet")'>
-            <i class="fe fe-message-square mr-1 text-primary"></i><small>${tweet.likes}</small>
+            <i class="fe fe-refresh-ccw mr-1 text-primary"></i><small>${tweet.likes}</small>
         </a>`
     }
 
@@ -210,7 +210,7 @@
             <div class="d-flex align-items-center mb-4 mb-lg-0">
                 <img src="{% static 'assets/images/avatar/avatar.jpg' %}" id="img-uploaded" class="avatar-lg rounded-circle" alt="">
                 <div class="ml-3">
-                    <h4 class="mb-0">Nickname <small style="color:grey">@username ${tweet.timestamp}</small></h4>
+                    <h4 class="mb-0">Nickname <small style="color:grey">@{{user.username}} ${tweet.timestamp}</small></h4>
                     <p class="mb-0" id='tweet-${tweet.id}'>
                         ${tweet.content}
                     </p>

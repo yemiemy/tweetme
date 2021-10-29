@@ -12,6 +12,7 @@ class TweetLike(models.Model):
     timestamp = models.TimeField(auto_now_add=True)
 
 class Tweet(models.Model):
+    parent = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(blank=True, null=True, max_length=240)
     image = models.ImageField(upload_to='tweets/images', blank=True, null=True)

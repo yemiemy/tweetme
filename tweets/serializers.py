@@ -10,6 +10,7 @@ TWEET_ACTION_OPTIONS = ["like", "unlike", "retweet"]
 class TweetActionSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     action = serializers.CharField()
+    content = serializers.CharField(allow_blank=True, required=False)
 
     def validate_content(self, value):
         value = value.lower().strip()
