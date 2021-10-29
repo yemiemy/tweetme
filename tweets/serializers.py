@@ -18,7 +18,7 @@ class TweetActionSerializer(serializers.Serializer):
             raise serializers.ValidationError("This is not a valid action for tweet.")
         return value
 
-class TweetSerializer(serializers.ModelSerializer):
+class TweetCreateSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
     timestamp = serializers.SerializerMethodField(read_only=True)
     class Meta:
@@ -27,12 +27,13 @@ class TweetSerializer(serializers.ModelSerializer):
             'id',
             'likes',
             'content',
-            'timestamp'
+            'timestamp',
+            'is_retweet'
         ]
 
     def get_likes(self, obj):
         return obj.likes.count()
-    
+
     def get_timestamp(self, obj):
         return humanize.naturalday(obj.timestamp)
 
@@ -40,3 +41,31 @@ class TweetSerializer(serializers.ModelSerializer):
         if len(value) > MAX_TWEET_LENGTH:
             raise serializers.ValidationError("Tweet is too long.")
         return value
+
+class TweetSerializer(serializers.ModelSerializer):
+    likes = serializers.SerializerMethodField(read_only=True)
+    content = serializers.SerializerMethodField(read_only=True)
+    timestamp = serializers.SerializerMethodField(read_only=True)
+    parent = TweetCreateSerializer(read_only=True)
+    class Meta:
+        model = Tweet
+        fields = [
+            'id',
+            'likes',
+            'content',
+            'timestamp',
+            'is_retweet',
+            'parent'
+        ]
+
+    def get_likes(self, obj):
+        return obj.likes.count()
+    
+    def get_content(self, obj):
+        content = obj.content
+        if obj.is_retweet:
+            content = obj.parent.content
+        return content
+
+    def get_timestamp(self, obj):
+        return humanize.naturalday(obj.timestamp)

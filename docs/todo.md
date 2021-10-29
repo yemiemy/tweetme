@@ -4,7 +4,9 @@
         - Image
     - Delete
     - Retweeting
-    - Liking 
+        - Read only serializer
+        - Create only serializer
+    - Liking and Unliking
      
 2. Users
     -> Register
