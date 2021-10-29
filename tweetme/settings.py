@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+MAX_TWEET_LENGTH = 240
 LOGIN_URL = "/login"
 
 MIDDLEWARE = [
