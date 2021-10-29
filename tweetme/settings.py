@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'tweets',
 ]
 
+LOGIN_URL = "/login"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

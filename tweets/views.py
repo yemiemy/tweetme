@@ -2,8 +2,6 @@ from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.utils.http import is_safe_url
 from django.conf import settings
-import humanize
-from random import randint
 
 # from tweetme.settings import ALLOWED_HOSTS
 
@@ -33,10 +31,16 @@ def tweet_list_view(request, *args, **kwargs):
     return JsonResponse(data)
 
 def tweet_create_view(request, *args, **kwargs):
+    if not request.user.is_authenticated:
+        if request.is_ajax():
+            return JsonResponse({"error":"Please sign in to your account to send a tweet."}, status=401)
+        return redirect(settings.LOGIN_URL)
+
     form = TweetForm(request.POST or None)
     next_url = request.POST.get("next") or None
     if form.is_valid():
         obj = form.save(commit=False)
+        obj.user = request.user
         # Do other form related logic
         obj.save()
         if request.is_ajax():
