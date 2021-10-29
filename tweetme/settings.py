@@ -39,6 +39,9 @@ INSTALLED_APPS = [
 
     #apps
     'tweets',
+
+    #third-party
+    'rest_framework',
 ]
 
 LOGIN_URL = "/login"
