@@ -3,7 +3,9 @@ from django.http import JsonResponse
 from django.utils.http import is_safe_url
 from django.conf import settings
 
-from rest_framework.decorators import api_view
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import TweetSerializer
 
@@ -42,6 +44,7 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     return Response(serializer.data, status=200)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
     serializer = TweetSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
@@ -66,7 +69,7 @@ def tweet_list_view_pure_django(request, *args, **kwargs):
 def tweet_create_view_pure_django(request, *args, **kwargs):
     if not request.user.is_authenticated:
         if request.is_ajax():
-            return JsonResponse({"error":"Please sign in to your account to send a tweet."}, status=401)
+            return JsonResponse({"error":"Please sign in to your account to send a tweet."}, status=403)
         return redirect(settings.LOGIN_URL)
 
     form = TweetForm(request.POST or None)

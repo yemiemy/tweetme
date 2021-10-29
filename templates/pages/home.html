@@ -98,11 +98,8 @@
                 }
                 handleTweetFormError(contenErrorMsg, true)
                 console.log(contenErrorMsg)
-            }else if (xhr.status === 401){
-                const errorJson = xhr.response
-                const contentError = errorJson.error
-                console.log(contentError)
-                alert(contentError)
+            }else if (xhr.status === 403){
+                alert("Please login to send a tweet.")
                 window.location.href = "/login"
             } 
             else if (xhr.status === 500){

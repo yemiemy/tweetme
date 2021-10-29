@@ -130,6 +130,15 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        # remove the below in production
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
