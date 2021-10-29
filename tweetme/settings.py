@@ -130,13 +130,15 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+DEFAULT_RENDERER_CLASSES = [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES += ['rest_framework.renderers.BrowsableAPIRenderer']
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        # remove the below in production
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    ]
+    'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }
 
 # Default primary key field type
