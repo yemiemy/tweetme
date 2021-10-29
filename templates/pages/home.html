@@ -54,8 +54,26 @@
 
 
 <script>
-    // Tweet Create Form Handling
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
     
+
+
+    // Tweet Create Form Handling
     function handleTweetFormError(msg, display){
         const formErrorElement = document.getElementById("tweet-create-form-error")
         if (display === true){
@@ -114,11 +132,11 @@
     
     const tweetCreateForm = document.getElementById('tweet-create-form')
     tweetCreateForm.addEventListener("submit", handleTweetCreateFormSubmit)
+    // --- END Tweet Create Form
     
-    
+
     // Tweet List Handling
     const tweetsContainerElement = document.getElementById('tweets')
-    
     function loadTweets(tweetsElement){
         const xhr = new XMLHttpRequest()
         const method ="GET"
@@ -129,11 +147,10 @@
         xhr.open(method, url)
         xhr.onload = function(){
             const listedTweets = xhr.response
-            // const listedTweets = serverResponse.response
-            var finalTweetStr = ""
-            for (var i = 0; i < listedTweets.length; ++i){
-                var tweet =  listedTweets[i]
-                var formattedTweet = formatTweetElement(tweet)
+            let finalTweetStr = ""
+            for (let i = 0; i < listedTweets.length; ++i){
+                let tweet =  listedTweets[i]
+                let formattedTweet = formatTweetElement(tweet)
                 finalTweetStr += formattedTweet
             }
 
@@ -145,34 +162,49 @@
     
     loadTweets(tweetsContainerElement)
 
-    function handleDidLike(tweet_id, currentCount) {
-        console.log(tweet_id, currentCount)
+    function handleTweetAction(tweet_id, currentCount, action) {
         const url = "{% url 'tweet_action' %}"
         const method = "POST"
         const data = JSON.stringify({
             id: tweet_id,
-            action: "like"
+            action: action
         })
         const xhr = new XMLHttpRequest()
+        const csrftoken = getCookie('csrftoken');
         xhr.open(method, url)
         xhr.setRequestHeader("Content-Type", "application/json")
         xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+        xhr.setRequestHeader("X-CSRFToken", csrftoken)
         xhr.onload = function () {
-            console.log(xhr.status, xhr.response)
+            loadTweets(tweetsContainerElement)
         }
         xhr.send(data)
     }
 
     function LikeBtn(tweet){
         return `
-        <a onclick='handleDidLike(${tweet.id}, ${tweet.likes})'>
-            <i class="fe fe-heart mr-1"></i><small>${tweet.likes}</small>
+        <a onclick='handleTweetAction(${tweet.id}, ${tweet.likes}, "like")'>
+            <i class="fe fe-heart mr-1 text-primary"></i><small>${tweet.likes}</small>
+        </a>`
+    }
+
+    function UnlikeBtn(tweet){
+        return `
+        <a onclick='handleTweetAction(${tweet.id}, ${tweet.likes}, "unlike")'>
+            <i class="fe fe-thumbs-down mr-1 text-danger"></i><small>${tweet.likes}</small>
+        </a>`
+    }
+
+    function RetweetBtn(tweet){
+        return `
+        <a onclick='handleTweetAction(${tweet.id}, ${tweet.likes}, "retweet")'>
+            <i class="fe fe-message-square mr-1 text-primary"></i><small>${tweet.likes}</small>
         </a>`
     }
 
     function formatTweetElement(tweet) {
-        var formattedTweet =
+        let formattedTweet =
         `
         <div class="d-lg-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center mb-4 mb-lg-0">
@@ -182,15 +214,15 @@
                     <p class="mb-0" id='tweet-${tweet.id}'>
                         ${tweet.content}
                     </p>
-                    <div class='btn-group d-flex'>
+                    <div class='btn-group d-flex' style="cursor:pointer;">
                         <div>
                             ${LikeBtn(tweet)}
                         </div>
                         <div class="ml-3">
-                            <i class="fe fe-refresh-ccw mr-1"></i>
+                            ${UnlikeBtn(tweet)}
                         </div>
                         <div class="ml-3">
-                            <i class="fe fe-message-square mr-1"></i>
+                            ${RetweetBtn(tweet)}
                         </div>
                     </div>
                 </div>
