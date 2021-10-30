@@ -39,31 +39,27 @@ function handleTweetAction(tweet_id, currentCount, action) {
   
 function ActionBtn(props){
     const {tweet, action} = props
+    const actionDisplay = action.display ? action.display : "Action"
+    const className = action.type === "like" ? `${actionDisplay}`: {actionDisplay}
+    const handleClick = (event) => {
+      event.preventDefault()
+      if (action.type === 'like'){
+        console.log(tweet.likes+1)
+      }
+    }
     return action.type === "like" ? (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a onClick={handleTweetAction(tweet.id, tweet.likes, "like")}>
-        <i className="fe fe-heart mr-1 text-primary"></i><small>{tweet.likes}</small>
-    </a>
-    ) : (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        <a onClick='handleTweetAction({tweet.id}, {tweet.likes}, "unlike")'>
-          <i className="fe fe-thumbs-down mr-1 text-danger"></i><small>{tweet.likes}</small>
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a onClick={handleClick}>
+          <i className={className}></i><small>{tweet.likes}</small>
       </a>
-      )
+    ) : (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a onClick={handleClick}>
+          <i className={className}></i><small></small>
+      </a>
+    ) 
   }
- 
-  
-//   function RetweetBtn(props) {
-//     const {tweet} = props
-//     return (
-//       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-//       <a onClick='handleTweetAction({tweet.id}, {tweet.likes}, "retweet")'>
-//         <i className="fe fe-refresh-ccw mr-1 text-primary"></i><small>{tweet.likes}</small>
-//       </a>
-//     )
-//   }
-  
-  
+
 
 function Tweet(props) {
     const {tweet} = props
@@ -79,13 +75,13 @@ function Tweet(props) {
               </p>
               <div className='btn-group d-flex' Style="cursor:pointer;">
                   <div>
-                      <ActionBtn tweet={tweet} action={{type: "like"}} />
+                    <ActionBtn tweet={tweet} action={{type: "like", display:"fe fe-heart mr-1 text-primary"}} />
                   </div>
                   <div className="ml-3">
-                    <ActionBtn tweet={tweet} action={{type: "unlike"}} />
+                    <ActionBtn tweet={tweet} action={{type: "unlike", display:"fe fe-thumbs-down mr-1 text-danger"}} />
                   </div>
                   <div className="ml-3">
-                    <ActionBtn tweet={tweet} action={{type: "retweet"}} />
+                    <ActionBtn tweet={tweet} action={{type: "retweet", display:"fe fe-refresh-ccw mr-1 text-primary"}} />
                   </div>
               </div>
             </div>
