@@ -1,43 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../avatar.jpg';
 
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+export function TweetCreateForm(props){
+  const textAreaRef = React.createRef()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const newTweetValue = textAreaRef.current.value
+    console.log(newTweetValue)
+    textAreaRef.current.value = ""
   }
-  
 
-function handleTweetAction(tweet_id, currentCount, action) {
-    const url = ""
-    const method = "POST"
-    const data = JSON.stringify({
-        id: tweet_id,
-        action: action
-    })
-    const xhr = new XMLHttpRequest()
-    const csrftoken = getCookie('csrftoken');
-    xhr.open(method, url)
-    xhr.setRequestHeader("Content-Type", "application/json")
-    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-    xhr.setRequestHeader("X-CSRFToken", csrftoken)
-    xhr.onload = function () {
-        // loadTweets(tweetsContainerElement)
-    }
-    xhr.send(data)
-  }
-  
+  return (
+    <form action="" onSubmit={handleSubmit} method="POST" id="tweet-create-form" encType="multipart/form-data">
+        <textarea ref={textAreaRef} name="tweet" maxLength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
+        <div className="mt-1">
+            <button type="submit" className="btn btn-outline-primary btn-sm">Tweet</button>
+        </div>
+    </form>
+  )
+}
+
 function ActionBtn(props){
     const {tweet, action} = props
     const [likes, setLikes] = useState(tweet.likes ? tweet.likes : 0)
@@ -104,4 +86,4 @@ function Tweet(props) {
     )
   }
 
-  export default Tweet;
+export default Tweet;

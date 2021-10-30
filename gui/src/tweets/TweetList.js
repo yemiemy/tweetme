@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Tweet from './TweetFormat';
+import Tweet from './components';
 import { loadTweets } from '../lookup';
 
 function TweetList (){

@@ -1,5 +1,7 @@
 import React from 'react';
-import { TweetList } from './tweets';
+import { TweetList, TweetCreateForm } from './tweets';
+
+
 
 function App() {
   
@@ -28,13 +30,7 @@ function App() {
                                 <div className="d-none alert alert-danger" id="tweet-create-form-error">
 
                                 </div>
-                                <form action="" method="POST" id="tweet-create-form" encType="multipart/form-data">
-                                    <input type="hidden" name="next" value="/" />
-                                    <textarea name="content" maxLength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
-                                    <div className="mt-1">
-                                        <button type="submit" className="btn btn-outline-primary btn-sm">Tweet</button>
-                                    </div>
-                                </form>
+                                <TweetCreateForm />
                             </div>
                         </div>
                     </div>
