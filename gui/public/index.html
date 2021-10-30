@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="%PUBLIC_URL%/assets/images/brand/logo/tweetme-icon.png"  />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -15,6 +15,25 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Libs CSS -->
+
+  <link href="%PUBLIC_URL%/assets/css/feather.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/bootstrap-icons.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/dragula.min.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/prism.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/dropzone.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/magnific-popup.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/bootstrap-select.min.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/tagify.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/tiny-slider.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/css/tippy.css" rel="stylesheet">
+
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/theme.min.css">
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -28,6 +47,264 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-default">
+    <div class="container-fluid px-0">
+      <a class="navbar-brand" href="home"><img src="%PUBLIC_URL%/assets/images/brand/logo/tweetme.svg" width="112" height="29" alt=""></a>
+      <!-- Mobile view nav wrap -->
+      <ul class="navbar-nav navbar-right-wrap ml-auto d-lg-none d-flex nav-top-wrap">
+        <li class="dropdown ml-2">
+            <li class="dropdown stopevent">
+              <a class="btn btn-light btn-icon rounded-circle text-muted indicator indicator-primary" href="#!" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fe fe-bell"> </i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownNotification">
+                  <div>
+                      <div class="border-bottom px-3 pb-3 d-flex justify-content-between align-items-center">
+                          <span class="h5 mb-0">Notifications</span>
+                          <a href="# " class="text-muted"><span class="align-middle"><i class="fe fe-settings mr-1"></i></span></a>
+                      </div>
+                      <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;">
+                        <ul class="list-group list-group-flush notification-list-scroll" style="overflow: hidden; width: auto; height: 300px;">
+                          <li class="list-group-item bg-light">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="d-flex">
+                                        <img src="{{task.track.thumbnail.url}}" alt="" class="avatar-md rounded-circle">
+                                        <div class="ml-3">
+                                            <h5 class="font-weight-bold mb-1">{{ task.track.course_title | truncatewords:3 }}</h5>
+                                            <p class="mb-3">
+                                                {{task.title | capfirst}}
+                                            </p>
+                                            <span class="font-size-xs text-muted">
+                                                <span><span class="fe fe-thumbs-up text-success mr-1"></span>{{task.date_added }},</span>
+                                                <span class="ml-1">{{task.date_added | time}}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <a class="stretched-link" href="courses:task-solution' task.id %}"></a>
+                                </div>
+                            </div>
+                          </li>
+                      </ul>
+                      <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                      <div class="border-top px-3 pt-3 pb-0">
+                          <a href="home" class="text-link font-weight-semi-bold">See all Notifications</a>
+                      </div>
+                  </div>
+              </div>
+          </li>   
+          <a class="rounded-circle" href="#!" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="avatar avatar-md avatar-indicators avatar-{{user.profile.status}}">
+                <img alt="avatar" src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" class="rounded-circle">
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
+            <div class="dropdown-item">
+              <div class="d-flex">
+                <div class="avatar avatar-md avatar-indicators avatar-{{user.profile.status}}">
+                  <img alt="avatar" src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" class="rounded-circle">
+                </div>
+                <div class="ml-3 lh-1">
+                  <h5 class="mb-1">{{user.first_name | capfirst}} {{user.last_name | capfirst}}</h5>
+                  <p class="mb-0 text-muted">{{user.email}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <ul class="list-unstyled">
+              <li>
+                <a class="dropdown-item" href="home">
+                  <i class="fe fe-user mr-2"></i>My learning
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">
+                  <i class="fe fe-user mr-2"></i>Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">
+                  <i class="fe fe-settings mr-2"></i>Settings
+                </a>
+              </li>
+            </ul>
+            <div class="dropdown-divider"></div>
+            <ul class="list-unstyled">
+              <li>
+                <a class="dropdown-item" href="">
+                  <i class="fe fe-power mr-2"></i>Sign Out
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">
+                  <i class="fe fe-user-plus mr-2"></i>Register
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="">
+                  <i class="fe fe-user mr-2"></i>Log In
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <!-- Button -->
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="icon-bar top-bar mt-0"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="navbar-default">
+        <form action="home" class="mt-3 mt-lg-0 ml-lg-3 d-flex align-items-center">
+          <span class="position-absolute pl-3 search-icon">
+            <i class="fe fe-search"></i>
+          </span>
+          <input type="search" class="form-control pl-6" name="query" placeholder="Search Tweets">
+        </form>
+        <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
+            <li class="dropdown d-inline-block stopevent">
+              <a class="btn btn-light btn-icon rounded-circle text-muted indicator indicator-primary" href="#!" role="button" id="dropdownNotificationSecond" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fe fe-bell"> </i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right" aria-labelledby="dropdownNotificationSecond">
+                  <div>
+                      <div class="border-bottom px-3 pb-3 d-flex justify-content-between align-items-center">
+                          <span class="h5 mb-0">Notifications</span>
+                          <a href="# " class="text-muted"><span class="align-middle"><i class="fe fe-settings mr-1"></i></span></a>
+                      </div>
+                      <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;">
+                        <ul class="list-group list-group-flush notification-list-scroll" style="overflow: hidden; width: auto; height: 300px;">
+                          <li class="list-group-item bg-light">
+                              <div class="row">
+                                  <div class="col">
+                                      <div class="d-flex">
+                                          <img src="{{task.track.thumbnail.url}}" alt="" class="avatar-md rounded-circle">
+                                          <div class="ml-3">
+                                              <h5 class="font-weight-bold mb-1">
+                                                {{task.track.course_title | truncatewords:3}}:</h5>
+                                              <p class="mb-3">
+                                                  {{task.title}}
+                                              </p>
+                                              <span class="font-size-xs text-muted">
+                                                  <span><span class="fe fe-thumbs-up text-success mr-1"></span>{{task.date_added }},</span>
+                                                  <span class="ml-1">{{task.date_added | time}}</span>
+                                              </span>
+                                          </div>
+                                      </div>
+                                      <a class="stretched-link" href=""></a>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                      <div class="border-top px-3 pt-3 pb-0">
+                          <a href="" class="text-link font-weight-semi-bold">See all Notifications</a>
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="dropdown ml-2 d-inline-block">
+            <a class="rounded-circle" href="#!" role="button" id="dropdownUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-md avatar-indicators avatar-{{user.profile.status}}">
+                <img alt="avatar" src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" class="rounded-circle">
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserProfile">
+              <div class="dropdown-item">
+                <div class="d-flex">
+                  <div class="avatar avatar-md avatar-indicators avatar-{{user.profile.status}}">
+                    <img alt="avatar" src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" class="rounded-circle">
+                  </div>
+                  <div class="ml-3 lh-1">
+                    <h5 class="mb-1">{{user.first_name|capfirst}} {{user.last_name|capfirst}}</h5>
+                    <p class="mb-0 text-muted">{{user.email}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <ul class="list-unstyled">
+                <li class="dropdown-submenu dropleft-lg">
+                  <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
+                    <i class="fe fe-circle mr-2"></i>Status
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <form action="" method="POST">
+                        
+                        <input type="hidden" name="online" value="online">
+                        <button type="submit" class="dropdown-item" href="#!">
+                          <span class="badge-dot bg-success mr-2"></span>Online
+                        </button>
+                      </form>
+                    </li>
+                    <li>
+                      <form action="" method="POST">
+                        
+                        <input type="hidden" name="offline" value="offline">
+                        <button type="submit" class="dropdown-item" href="#!">
+                          <span class="badge-dot bg-secondary mr-2"></span>Offline
+                        </button>
+                      </form>
+                    </li>
+                    <li>
+                      <form action="" method="POST">
+                        
+                        <input type="hidden" name="away" value="away">
+                        <button type="submit" class="dropdown-item" href="#!">
+                          <span class="badge-dot bg-warning mr-2"></span>Away
+                        </button>
+                      </form>
+                    </li>
+                    <li>
+                      <form action="" method="POST">
+                        
+                        <input type="hidden" name="busy" value="busy">
+                        <button type="submit" class="dropdown-item" href="#!">
+                          <span class="badge-dot bg-danger mr-2"></span>Busy
+                        </button>
+                      </form>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="home">
+                    <i class="fe fe-user mr-2"></i>My Learning
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="">
+                    <i class="fe fe-user mr-2"></i>Profile
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="">
+                    <i class="fe fe-settings mr-2"></i>Settings
+                  </a>
+                </li>
+              </ul>
+              <div class="dropdown-divider"></div>
+              <ul class="list-unstyled">
+                <li>
+                  <a class="dropdown-item" href="">
+                    <i class="fe fe-power mr-2"></i>Sign Out
+                  </a>
+                </li>
+              </ul>
+            </div>
+            </li>
+        </ul>
+        <div class="ml-auto mt-3 mt-lg-0">
+          <a href="" class="btn btn-white shadow-sm mr-1">Sign In</a>
+          <a href="" class="btn btn-primary">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <!-- // END NAVBAR-->
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -39,5 +316,73 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="container">
+          <div class="row align-items-center no-gutters border-top py-2">
+              <!-- Desc -->
+              <div class="col-md-6 col-12 text-center text-md-left">
+                  <span>© <script>document.write(new Date().getFullYear());</script> TweetMe. All Rights Reserved.</span>
+              </div>
+                <!-- Links -->
+              <div class="col-12 col-md-6">
+                  <nav class="nav nav-footer justify-content-center justify-content-md-end">
+                      <a class="nav-link active pl-0" href="" target="_blank">Privacy</a>
+                      <a class="nav-link" href="" target="_blank">Terms </a>
+                      <a class="nav-link" href="" target="_blank">Feedback</a>
+                      <a class="nav-link" href="mailto:rasholayemi@gmail.com">Support</a>
+                  </nav>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- // END FOOTER-->
+
+    <!-- Scripts -->
+    <!-- Libs JS -->
+    <script src="%PUBLIC_URL%/assets/js/jquery.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/odometer.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/jquery.slimscroll.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/bootstrap-select.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/flatpickr.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/jquery.inputmask.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/quill.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/file-upload-with-preview.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/dragula.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/bs-stepper.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/dropzone.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/jQuery.print.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/prism.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/prism-scss.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/tagify.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/tiny-slider.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/popper.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/tippy-bundle.umd.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/typed.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/jsvectormap.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/jquery.dataTables.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/dataTables.bootstrap5.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/dataTables.responsive.min.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/responsive.bootstrap5.min.js"></script>
+
+
+
+    <!-- clipboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+
+    <!-- Theme JS -->
+    <script src="%PUBLIC_URL%/assets/js/theme.min.js"></script>
+
+
+    <svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs>
+        <polyline id="SvgjsPolyline1003" points="0,0"></polyline>
+        <path id="SvgjsPath1004" d="M0 0 ">
+
+        </path>
+    </svg>
   </body>
 </html>
