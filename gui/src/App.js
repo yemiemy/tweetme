@@ -60,7 +60,7 @@ function App() {
                                 <div className="d-none alert alert-danger" id="tweet-create-form-error">
 
                                 </div>
-                                <form action="" method="POST" id="tweet-create-form" enctype="multipart/form-data">
+                                <form action="" method="POST" id="tweet-create-form" encType="multipart/form-data">
                                     <input type="hidden" name="next" value="/" />
                                     <textarea name="content" maxlength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
                                     <div className="mt-1">
