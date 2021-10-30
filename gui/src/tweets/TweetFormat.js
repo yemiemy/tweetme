@@ -18,7 +18,7 @@ function getCookie(name) {
   
 
 function handleTweetAction(tweet_id, currentCount, action) {
-    const url = "{% url 'tweet_action' %}"
+    const url = ""
     const method = "POST"
     const data = JSON.stringify({
         id: tweet_id,
@@ -41,12 +41,12 @@ function ActionBtn(props){
     const {tweet, action} = props
     return action.type === "like" ? (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a onclick='handleTweetAction({tweet.id}, {tweet.likes}, "like")'>
+    <a onClick={handleTweetAction(tweet.id, tweet.likes, "like")}>
         <i className="fe fe-heart mr-1 text-primary"></i><small>{tweet.likes}</small>
     </a>
     ) : (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        <a onclick='handleTweetAction({tweet.id}, {tweet.likes}, "unlike")'>
+        <a onClick='handleTweetAction({tweet.id}, {tweet.likes}, "unlike")'>
           <i className="fe fe-thumbs-down mr-1 text-danger"></i><small>{tweet.likes}</small>
       </a>
       )
@@ -57,7 +57,7 @@ function ActionBtn(props){
 //     const {tweet} = props
 //     return (
 //       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-//       <a onclick='handleTweetAction({tweet.id}, {tweet.likes}, "retweet")'>
+//       <a onClick='handleTweetAction({tweet.id}, {tweet.likes}, "retweet")'>
 //         <i className="fe fe-refresh-ccw mr-1 text-primary"></i><small>{tweet.likes}</small>
 //       </a>
 //     )

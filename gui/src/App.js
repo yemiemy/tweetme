@@ -1,40 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Tweet from './containers/TweetFormat';
-
-
-function loadTweets(callback){
-  const xhr = new XMLHttpRequest()
-  const method ="GET"
-  const url = "http://127.0.0.1:8000/api/tweets/"
-  const responseType = "json"
-
-  xhr.responseType = responseType
-  xhr.open(method, url)
-  xhr.onload = function(){
-    callback(xhr.response, xhr.status)
-  }
-  xhr.onerror =  function (e) {
-    console.log(e)
-    callback({"message":"The request was an error."}, 400)
-  }
-  xhr.send()
-}
-
-
+import React from 'react';
+import { TweetList } from './tweets';
 
 function App() {
-  const [tweets, setTweets] = useState([{content: 123}])
-
-  useEffect(() => {
-    // do my lookup
-    const myCallback = (response, status) => {
-      console.log(response, status)
-      if (status === 200){
-        setTweets(response)
-      }
-    }
-    loadTweets(myCallback)
-  }, [])
+  
   return (
     <div>
       <div className="py-lg-6 py-4 bg-primary">
@@ -62,7 +30,7 @@ function App() {
                                 </div>
                                 <form action="" method="POST" id="tweet-create-form" encType="multipart/form-data">
                                     <input type="hidden" name="next" value="/" />
-                                    <textarea name="content" maxlength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
+                                    <textarea name="content" maxLength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
                                     <div className="mt-1">
                                         <button type="submit" className="btn btn-outline-primary btn-sm">Tweet</button>
                                     </div>
@@ -71,12 +39,7 @@ function App() {
                         </div>
                     </div>
                     <div className="dropdown-divider"></div>
-                    <div id="tweets">
-                      {tweets.map((item, index)=>{
-                        return <Tweet tweet={item} key={`${index}-{item.id}`}/>
-                      })}
-                      
-                    </div>
+                    <TweetList />
                 </div>
             </div>
         </div>
