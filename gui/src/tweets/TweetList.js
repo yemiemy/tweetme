@@ -3,7 +3,7 @@ import Tweet from './TweetFormat';
 import { loadTweets } from '../lookup';
 
 function TweetList (){
-  const [tweets, setTweets] = useState([{content: 123}])
+  const [tweets, setTweets] = useState([])
 
   useEffect(() => {
     // do my lookup
