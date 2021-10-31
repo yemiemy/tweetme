@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Tweet from './components';
-import { loadTweets } from '../lookup';
+import { createTweet, loadTweets } from '../lookup';
 
 
 export function TweetComponent(props){
@@ -10,12 +10,15 @@ export function TweetComponent(props){
     event.preventDefault()
     const newTweetValue = textAreaRef.current.value
     let tempNewTweets = [...newTweets]
-    tempNewTweets.unshift({
-      content: newTweetValue,
-      likes: 0,
-      id:123,
-      timestamp: "today"
+    createTweet(newTweetValue, (response, status) => {
+      if (status === 201){
+        tempNewTweets.unshift(response)
+      } else{
+        console.log(response)
+        alert("An error occured. Please try again.")
+      }
     })
+    
     setNewTweets(tempNewTweets)
     textAreaRef.current.value = ""
   }
