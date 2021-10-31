@@ -1,25 +1,6 @@
 import React, { useState } from 'react';
 import '../avatar.jpg';
 
-export function TweetCreateForm(props){
-  const textAreaRef = React.createRef()
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const newTweetValue = textAreaRef.current.value
-    console.log(newTweetValue)
-    textAreaRef.current.value = ""
-  }
-
-  return (
-    <form action="" onSubmit={handleSubmit} method="POST" id="tweet-create-form" encType="multipart/form-data">
-        <textarea ref={textAreaRef} name="tweet" maxLength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
-        <div className="mt-1">
-            <button type="submit" className="btn btn-outline-primary btn-sm">Tweet</button>
-        </div>
-    </form>
-  )
-}
-
 function ActionBtn(props){
     const {tweet, action} = props
     const [likes, setLikes] = useState(tweet.likes ? tweet.likes : 0)

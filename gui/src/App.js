@@ -1,5 +1,5 @@
 import React from 'react';
-import { TweetList, TweetCreateForm } from './tweets';
+import { TweetComponent } from './tweets';
 
 
 
@@ -23,19 +23,7 @@ function App() {
         <div className="container"> 
             <div className="card">
                 <div className="card-body">
-                    <div className="d-lg-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center mb-4 mb-lg-0">
-                            <img src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" id="img-uploaded" className="avatar-xl rounded-circle" alt="" />
-                            <div className="ml-3">
-                                <div className="d-none alert alert-danger" id="tweet-create-form-error">
-
-                                </div>
-                                <TweetCreateForm />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="dropdown-divider"></div>
-                    <TweetList />
+                    <TweetComponent />
                 </div>
             </div>
         </div>

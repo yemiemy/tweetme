@@ -1,6 +1,6 @@
-import TweetList from "./TweetList";
-import { TweetCreateForm } from "./components";
+import TweetList, { TweetComponent } from "./TweetList";
+
 export {
     TweetList,
-    TweetCreateForm
+    TweetComponent
 }
