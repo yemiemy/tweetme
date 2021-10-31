@@ -13,7 +13,8 @@ export function TweetComponent(props){
     tempNewTweets.unshift({
       content: newTweetValue,
       likes: 0,
-      id:123
+      id:123,
+      timestamp: "today"
     })
     setNewTweets(tempNewTweets)
     textAreaRef.current.value = ""

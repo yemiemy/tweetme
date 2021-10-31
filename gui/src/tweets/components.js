@@ -30,7 +30,7 @@ function ActionBtn(props){
     ) : (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a onClick={handleClick}>
-          <i className={className}></i><small>Btn</small>
+          <i className={className}></i><small></small>
       </a>
     ) 
   }
@@ -51,9 +51,6 @@ function Tweet(props) {
               <div className='btn-group d-flex' style={{cursor:"pointer"}}>
                   <div>
                     <ActionBtn tweet={tweet} action={{type: "like", display:"fe fe-heart mr-1 text-primary"}} />
-                  </div>
-                  <div className="ml-3">
-                    <ActionBtn tweet={tweet} action={{type: "unlike", display:"fe fe-thumbs-down mr-1 text-danger"}} />
                   </div>
                   <div className="ml-3">
                     <ActionBtn tweet={tweet} action={{type: "retweet", display:"fe fe-refresh-ccw mr-1 text-primary"}} />
