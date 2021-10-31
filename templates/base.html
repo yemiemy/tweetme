@@ -16,6 +16,8 @@
 
   <!-- Libs CSS -->
 
+  {% include 'react/css.html' %}
+
   <link href=" {% static 'assets/css/feather.css' %} " rel="stylesheet">
   <link href=" {% static 'assets/css/bootstrap-icons.css' %} " rel="stylesheet">
   <link href=" {% static 'assets/css/dragula.min.css' %} " rel="stylesheet">
@@ -41,7 +43,7 @@
   </head>
 
   <body>
-  
+    <noscript>You need to enable JavaScript to run this app.</noscript>
   
     <!-- Navbar -->
     {% include 'components/navbar.html' %}
@@ -53,6 +55,8 @@
     {% include 'components/footer.html' %}
     <!-- Scripts -->
     <!-- Libs JS -->
+    {% include 'react/base_embed.html' %}
+    {% include 'react/js.html' %}
     <script src=" {% static 'assets/js/jquery.min.js' %} "></script>
     <script src=" {% static 'assets/js/bootstrap.bundle.min.js' %} "></script>
     <script src=" {% static 'assets/js/odometer.min.js' %} "></script>
