@@ -48,7 +48,7 @@ function TweetList (props){
   
   const [tweetsInit, setTweetsInit] = useState([])
   const [tweets, setTweets] = useState([])
-  
+  const [tweetsDidSet, setTweetsDidSet] = useState(false)
   useEffect(() => {
     let final = [...props.tweets].concat(tweetsInit)
     if (final.length !== tweets.length){
@@ -57,15 +57,19 @@ function TweetList (props){
   }, [props.tweets, tweets, tweetsInit])
 
   useEffect(() => {
-    // do my lookup
-    const myCallback = (response, status) => {
-      console.log(response, status)
-      if (status === 200){
-        setTweetsInit(response)
+    if (tweetsDidSet === false){
+      // do my lookup
+      const myCallback = (response, status) => {
+        console.log(response, status)
+        if (status === 200){
+          setTweetsInit(response)
+          setTweetsDidSet(true)
+        }
       }
+      loadTweets(myCallback)
     }
-    loadTweets(myCallback)
-  }, [])
+    
+  }, [tweetsDidSet, setTweetsDidSet])
 
   return (
     <div id="tweets">
