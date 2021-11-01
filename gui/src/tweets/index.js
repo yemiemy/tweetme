@@ -1,10 +1,11 @@
 import TweetList, { TweetComponent } from "./TweetComponent";
-import { apiTweetCreate, apiTweetList } from "./lookup";
+import { apiTweetCreate, apiTweetList, apiTweetAction } from "./lookup";
 
 
 export {
     TweetList,
     TweetComponent,
     apiTweetCreate,
-    apiTweetList
+    apiTweetList,
+    apiTweetAction
 }

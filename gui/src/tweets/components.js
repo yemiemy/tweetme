@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
+import { apiTweetAction } from '.';
 import '../avatar.jpg';
 
 function ActionBtn(props){
     const {tweet, action} = props
     const [likes, setLikes] = useState(tweet.likes ? tweet.likes : 0)
-    const [userLike, setUserLike] = useState(tweet.userLike === true ? true : false)
+    // const [userLike, setUserLike] = useState(tweet.userLike === true ? true : false)
     const className = action.display ? action.display : "Action"
+    
+    const handleActionBackendEvent = (response, status) => {
+      console.log(response, status)
+      if (status === 200){
+        setLikes(response.likes)
+        // setUserLike(true)
+      }
+    }
+    
     const handleClick = (event) => {
       event.preventDefault()
       if (action.type === 'like'){
-
-        if (userLike === true){
-          setLikes(likes-1)
-          setUserLike(false)
-        }else{
-          setLikes(likes+1)
-          setUserLike(true)
-        }
-
-        
+        apiTweetAction(tweet.id, action.type, handleActionBackendEvent)     
       }
     }
     return action.type === "like" ? (
