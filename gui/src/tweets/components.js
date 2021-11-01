@@ -5,8 +5,7 @@ function ActionBtn(props){
     const {tweet, action} = props
     const [likes, setLikes] = useState(tweet.likes ? tweet.likes : 0)
     const [userLike, setUserLike] = useState(tweet.userLike === true ? true : false)
-    const actionDisplay = action.display ? action.display : "Action"
-    const className = action.type === "like" ? `${actionDisplay}`: actionDisplay
+    const className = action.display ? action.display : "Action"
     const handleClick = (event) => {
       event.preventDefault()
       if (action.type === 'like'){
