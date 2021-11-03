@@ -3,16 +3,15 @@ import { apiTweetAction } from '.';
 import '../avatar.jpg';
 
 function ActionBtn(props){
-    const {tweet, action} = props
-    const [likes, setLikes] = useState(tweet.likes ? tweet.likes : 0)
+    const {tweet, action, didPerformAction} = props
+    const likes = tweet.likes ? tweet.likes : 0
     // const [userLike, setUserLike] = useState(tweet.userLike === true ? true : false)
     const className = action.display ? action.display : "Action"
     
     const handleActionBackendEvent = (response, status) => {
       console.log(response, status)
-      if (status === 200){
-        setLikes(response.likes)
-        // setUserLike(true)
+      if ((status === 200 || status === 201) && didPerformAction){
+        didPerformAction(response, status)
       }
     }
     
@@ -45,8 +44,16 @@ export function ParentTweet(props){
 
 function Tweet(props) {
     const {tweet} = props
-
+    const [actionTweet, setActionTweet] = useState(props.tweet ? props.tweet : null)
     const className = props.className ? props.className : 'avatar-lg rounded-circle'
+
+    const handlePerformAction = (newActionTweet, status) => {
+      if (status === 200){
+        setActionTweet(newActionTweet)
+      } else if (status === 201){
+        //let Tweet list know.
+      }
+    }
 
     return (
       <div>
@@ -59,14 +66,15 @@ function Tweet(props) {
                 <p className="mb-0" id='tweet-{tweet.id}'>
                     {tweet.content}
                 </p>
+                {actionTweet &&
                 <div className='btn-group d-flex' style={{cursor:"pointer"}}>
                     <div>
-                      <ActionBtn tweet={tweet} action={{type: "like", display:"fe fe-heart mr-1 text-primary"}} />
+                      <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type: "like", display:"fe fe-heart mr-1 text-primary"}} />
                     </div>
                     <div className="ml-3">
-                      <ActionBtn tweet={tweet} action={{type: "retweet", display:"fe fe-refresh-ccw mr-1 text-primary"}} />
+                      <ActionBtn tweet={actionTweet} didPerformAction={handlePerformAction} action={{type: "retweet", display:"fe fe-refresh-ccw mr-1 text-primary"}} />
                     </div>
-                </div>
+                </div>}
               </div>
               <ParentTweet tweet = {tweet}/>
             </div>
