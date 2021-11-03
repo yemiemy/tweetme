@@ -76,10 +76,20 @@ function TweetList (props){
     
   }, [tweetsDidSet, setTweetsDidSet])
 
+  const handleDidRetweet = (newTweet) => {
+    const updateTweetsInit = [...tweetsInit]
+    updateTweetsInit.unshift(newTweet)
+    setTweetsInit(updateTweetsInit)
+
+    const updateFinalTweets = [...tweets]
+    updateFinalTweets.unshift(tweets)
+    setTweets(updateFinalTweets)
+  }
+
   return (
     <div id="tweets">
         {tweets.map((item, index)=>{
-        return <Tweet tweet={item} key={`${index}-{item.id}`}/>
+        return <Tweet didRetweet={handleDidRetweet} tweet={item} key={`${index}-{item.id}`}/>
         })}
     
      </div>
