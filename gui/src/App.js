@@ -1,10 +1,10 @@
 import React from 'react';
-import { TweetComponent } from './tweets';
 
 
 
-function App() {
-  
+
+function App(props) {
+  console.log(props)
   return (
     <div>
       <div className="py-lg-6 py-4 bg-primary">
@@ -23,7 +23,7 @@ function App() {
         <div className="container"> 
             <div className="card">
                 <div className="card-body">
-                    <TweetComponent />
+                    {/* <TweetComponent /> */}
                 </div>
             </div>
         </div>

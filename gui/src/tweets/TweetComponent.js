@@ -3,7 +3,8 @@ import Tweet from './components';
 import { apiTweetList, apiTweetCreate } from '.';
 
 
-export function TweetComponent(props){
+function TweetComponent(props){
+  console.log(props)
   const textAreaRef = React.createRef()
   const [newTweets, setNewTweets] = useState([])
 
@@ -26,30 +27,50 @@ export function TweetComponent(props){
   }
   return (
     <div>
-      <div className="d-lg-flex align-items-center justify-content-between">
-          <div className="d-flex align-items-center mb-4 mb-lg-0">
-              <img src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" id="img-uploaded" className="avatar-xl rounded-circle" alt="" />
-              <div className="ml-3">
-                  <div className="d-none alert alert-danger" id="tweet-create-form-error">
+      <div className="py-lg-6 py-4 bg-primary">
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-12 col-lg-12 col-md-12 col-12">
+              <div>
+                <h1 className="text-white display-4 mb-0">Welcome to TweetMe!</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-                  </div>
-                  <form action="" onSubmit={handleSubmit} method="POST" id="tweet-create-form" encType="multipart/form-data">
-                    <textarea ref={textAreaRef} name="tweet" maxLength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
-                    <div className="mt-1">
-                        <button type="submit" className="btn btn-outline-primary btn-sm">Tweet</button>
+      <div className="py-6">
+        <div className="container"> 
+            <div className="card">
+                <div className="card-body">
+                  <div className="d-lg-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center mb-4 mb-lg-0">
+                        <img src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" id="img-uploaded" className="avatar-xl rounded-circle" alt="" />
+                        <div className="ml-3">
+                            <div className="d-none alert alert-danger" id="tweet-create-form-error">
+
+                            </div>
+                            <form action="" onSubmit={handleSubmit} method="POST" id="tweet-create-form" encType="multipart/form-data">
+                              <textarea ref={textAreaRef} name="tweet" maxLength="" required placeholder="What's happening?" className="form-control" id="" cols="150" rows="3"></textarea>
+                              <div className="mt-1">
+                                  <button type="submit" className="btn btn-outline-primary btn-sm">Tweet</button>
+                              </div>
+                            </form>
+                        </div>
                     </div>
-                  </form>
+                  </div>
+                  <div className="dropdown-divider"></div>
+                  <TweetList tweets = {newTweets}/>
+                </div>
               </div>
           </div>
-      </div>
-      <div className="dropdown-divider"></div>
-      <TweetList tweets = {newTweets}/>
+        </div>
     </div>
   )
 }
 
 
-function TweetList (props){
+export function TweetList (props){
   
   const [tweetsInit, setTweetsInit] = useState([])
   const [tweets, setTweets] = useState([])
@@ -96,4 +117,4 @@ function TweetList (props){
   )
 }
 
-export default TweetList;
+export default TweetComponent;
