@@ -1,3 +1,4 @@
+from django.contrib.auth.signals import user_login_failed
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.utils.http import is_safe_url
@@ -28,8 +29,10 @@ def tweet_list_view(request, *args, **kwargs):
     Consume by JavaScript or Swift/Java/iOS/Android 
     """
     qs = Tweet.objects.all()
+    username = request.GET.get("username")
+    if username != None:
+        qs = qs.filter(user__username__iexact=username)
     serializer = TweetSerializer(qs, many=True)
-
     return Response(serializer.data)
 
 @api_view(['POST'])
