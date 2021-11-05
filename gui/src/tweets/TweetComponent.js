@@ -4,10 +4,10 @@ import { apiTweetList, apiTweetCreate } from '.';
 
 
 function TweetComponent(props){
-  console.log(props)
   const textAreaRef = React.createRef()
   const [newTweets, setNewTweets] = useState([])
 
+  const canTweet = props.canTweet === "false" ? false : true
   const handleBackendUpdate = (response, status) => {
     let tempNewTweets = [...newTweets]
     if (status === 201){
@@ -44,7 +44,7 @@ function TweetComponent(props){
             <div className="card">
                 <div className="card-body">
                   <div className="d-lg-flex align-items-center justify-content-between">
-                    <div className="d-flex align-items-center mb-4 mb-lg-0">
+                    {canTweet === true && <div className="d-flex align-items-center mb-4 mb-lg-0">
                         <img src="%PUBLIC_URL%/assets/images/avatar/avatar.jpg" id="img-uploaded" className="avatar-xl rounded-circle" alt="" />
                         <div className="ml-3">
                             <div className="d-none alert alert-danger" id="tweet-create-form-error">
@@ -57,10 +57,10 @@ function TweetComponent(props){
                               </div>
                             </form>
                         </div>
-                    </div>
+                    </div>}
                   </div>
                   <div className="dropdown-divider"></div>
-                  <TweetList tweets = {newTweets}/>
+                  <TweetList tweets = {newTweets} {...props}/>
                 </div>
               </div>
           </div>
@@ -92,10 +92,10 @@ export function TweetList (props){
           setTweetsDidSet(true)
         }
       }
-      apiTweetList(handleTweetListLookup)
+      apiTweetList(props.username, handleTweetListLookup)
     }
     
-  }, [tweetsDidSet, setTweetsDidSet])
+  }, [tweetsDidSet, setTweetsDidSet, props.username])
 
   const handleDidRetweet = (newTweet) => {
     const updateTweetsInit = [...tweetsInit]
